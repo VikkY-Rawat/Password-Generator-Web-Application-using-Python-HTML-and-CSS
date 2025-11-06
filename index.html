@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>🔐 Password Generator</h1>
+
+    <form method="POST">
+        <label>Password Length:</label>
+        <input type="number" name="length" min="4" max="30" value="10" required>
+
+        <div class="options">
+            <label><input type="checkbox" name="uppercase" checked> Include Uppercase (A-Z)</label><br>
+            <label><input type="checkbox" name="digits" checked> Include Numbers (0-9)</label><br>
+            <label><input type="checkbox" name="symbols" checked> Include Symbols (!@#$%)</label>
+        </div>
+
+        <button type="submit">Generate Password</button>
+    </form>
+
+    {% if password %}
+    <div class="output">
+        <p><strong>Your Password:</strong></p>
+        <input type="text" id="password" value="{{ password }}" readonly>
+        <button onclick="copyPassword()">Copy</button>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function copyPassword() {
+    var copyText = document.getElementById("password");
+    copyText.select();
+    document.execCommand("copy");
+    alert("Password copied to clipboard!");
+}
+</script>
+</body>
+</html>
